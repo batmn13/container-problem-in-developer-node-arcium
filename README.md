@@ -69,4 +69,20 @@ docker logs -f arx-node
 ```
 
 
+## run this 
+
+```
+docker rm -f arx-node 2>/dev/null || true
+
+docker run -d --name arx-node --pull always --restart unless-stopped \
+  -v "$PWD/node-config.toml:/usr/arx-node/node_config.toml:ro" \
+  -v "$PWD/node-keypair.json:/usr/arx-node/node-keys/node_keypair.json:ro" \
+  -v "$PWD/callback-kp.json:/usr/arx-node/node-keys/callback_keypair.json:ro" \
+  -v "$PWD/identity.pem:/usr/arx-node/node-keys/node_identity.pem:ro" \
+  -v "$PWD/arx-node-logs:/usr/arx-node/logs" \
+  -p 8000:8000 \
+  arcium/arx-node
+```
+
+
 
