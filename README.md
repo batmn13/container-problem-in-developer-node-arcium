@@ -84,5 +84,16 @@ docker run -d --name arx-node --pull always --restart unless-stopped \
   arcium/arx-node
 ```
 
+## then this
+
+```
+sleep 2
+if [ "$(docker inspect -f '{{.State.Running}}' arx-node)" != "true" ]; then
+  docker logs arx-node
+  exit 1
+fi
+
+docker logs -f arx-node
+```
 
 
