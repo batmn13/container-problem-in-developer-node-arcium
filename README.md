@@ -1,15 +1,34 @@
 ## container-problem-in-developer-node-arcium
-this solve container problem in arcium
+this solve node-config.toml problem in arcium
 
-## Create and save this script
+## Replace your node-config.toml
 
-Run this in your terminal
+```
+nano node-config.toml
+```
+
+## Paste this config
+
+```
+[node]
+rpc_url = "https://api.devnet.solana.com"
+identity_keypair = "/usr/arx-node/node-keys/node_identity.pem"
+operator_keypair = "/usr/arx-node/node-keys/node_keypair.json"
+callback_keypair = "/usr/arx-node/node-keys/callback_keypair.json"
+listen_address = "0.0.0.0:8000"
+```
+
+ ## SAVE 
+
+ CTRL+O, ENTER, CTRL+X
+
+## RUN THE NODE
 
 ```
 nano run_arx_node.sh
 ```
 
-after that put this code 
+## PASTE THIS 
 
 ```
 #!/usr/bin/env bash
@@ -29,27 +48,25 @@ docker run -d --name "$CONTAINER" \
   -v "$(pwd)/identity.pem:/usr/arx-node/node-keys/node_identity.pem" \
   -v "$(pwd)/arx-node-logs:/usr/arx-node/logs" \
   -p 8000:8000 \
-  "$IMAGE"
-
-docker exec -it "$CONTAINER" sh -c 'tail -F /usr/arx-node/logs/node.log'
-
+  arcium/arx-node
 ```
 
-## Save and exit
+## SAVE 
 
-```
-CTRL + O, ENTER, CTRL + X
-```
+CTRL+O, ENTER, CTRL+X
 
-## then run this
+## run code 
+
 ```
 chmod +x run_arx_node.sh
-```
-
-## final step run this 
-
-```
 ./run_arx_node.sh
 ```
 
-your issue is solve gmpc
+## View live logs
+
+```
+docker logs -f arx-node
+```
+
+
+
